@@ -2,7 +2,7 @@
 ### http://www.imooc.com/learn/839  
 ### 用maven管理项目更方便些  
   
-### Redis 命令    
+### Redis 数据结构    
 String  
 
 * set [ket] [value] 赋值
@@ -30,4 +30,46 @@ Hash
 
 List  
   
-* 
+* lpush [listname] [value0] [value1] [value2]...给listname左侧添加value
+* rpush [listname] [value0] [value1] [value2]...给listname右侧添加value  
+* lrange [listname] [start] [end] 查看listname从start到end,end为-1时表示最后一个元素,end为-2时表示倒数第2个元素  
+* lpop [listname] 左弹出listname第一个元素  
+* rpop [listname] 右弹出listname最后一个元素  
+* llen [listname] 获取listname元素个数  
+* lpushx [listname] [X] 将X插入listname的头部，不存在listname则不插入  
+* rpushx [listname] [X] 将X插入listname的尾部，不存在listname则不插入  
+* lren [listname] [count] [value]  删除listname中count个value,count为正数则从头部开始删,count为负数则从尾部开始删,count为0时则删除listname中所有的value  
+* lset [listname] [index] [value] 设置listname第index个的元素的值为value  
+* linsert [listname] [before/after] [value1] [value2] 在listname的第一个value1之前/之后插入一个value2  
+* rpoplpush [listname1] [listname2] 将listname1的尾部最后一个原始弹出放到listname2头部第一个元素  
+
+Set
+  
+* sadd [setname] [value0] [value1] [value2]...给setname中添加value,不能重复  
+* srem [setname] [value0] [value1] [value2]...删除set中的value  
+* smembers [setname] 查看setname中所有数据  
+* sismember [setname] [value] 判断setname是否存在value  
+* sdiff [setname1] [setname2] 差集运算setname1-setname2,属于setname1且不属于setname2的元素  
+* sinter [setname1] [setname2] 交集运算  
+* sunion [setname1] [setname2] 并集运算  
+* scard [setname] 获取setame元素个数  
+* srandmember [setname] 随机返回setname的一个元素  
+* sdiffstore [setname0] [setname1] [setname2] 将setname1与setname2差集运算的结果存放到setname0中  
+* sinterstore [setname0] [setname1] [setname2] 将setname1与setname2交集运算的结果存放到setname0中 
+* sunionstore [setname0] [setname1] [setname2] 将setname1与setname2并集运算的结果存放到setname0中  
+  
+Sorted-Set  
+
+* zadd [sortedname] [score0 value0] [score1 value1] 给sortedset添加value,每个value都有一个分数score,如果value已经存在则只更新score
+* zscore [sortedname] [value] 查看sortedname中value的score
+* zcard [sortedname] 获取sortedname中元素个数
+* zrange [sortedname] [start] [end] 按照分数从小到大查看sortedname的元素,从start到end,end为-1时表示最后一个元素,后面加上withscores则显示score
+* zrevrange [sortedname] [start] [end] 按照分数从大到小查看sortedname的元素,从start到end,end为-1时表示最后一个元素,后面加上withscores则显示score
+* zrangebyscore [sortedname] [score] [score] 分数范围查看sortedname的元素,后面加上withscores则显示score,后面加上limit[start] [end]选择显示个数
+* zrem [sortedname] [value0] [value1] 删除sortedname中的value 
+* zremrangebyrank [sortedname] [start] [end] 删除sortedname从start到end的元素 
+* zremrangebyscore [sortedname] [score] [score] 按照score分数范围删除sortedname的元素
+* zincrby [sortedname] [score] [value] 给指定元素增加分数
+* zcount [sortedname] [score] [score] 查看sortedname在分数范围内的成员个数
+
+
