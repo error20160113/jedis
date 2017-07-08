@@ -72,4 +72,24 @@ Sorted-Set
 * zincrby [sortedname] [score] [value] 给指定元素增加分数
 * zcount [sortedname] [score] [score] 查看sortedname在分数范围内的成员个数
 
+keys通用操作、事务 
+
+* keys * 查看所有key
+* del [key] 删除key
+* exists [key]  判断key是否存在
+* rename [key] [newkey] 改名
+* expire [key] [S] 设置key在S秒后失效
+* ttl [key] 查看key失效时间
+* type [key] 获取key的指定类型
+* select [0-15] 选择0-15个数据库
+* move [key] [0-15] 将key移动动到另一个数据库中
+* multi 开启事务
+* exec 提交事务
+* discard 回滚事务  
+
+redis持久化  
+RDB方式实在指定时间内把数据和快照写入硬盘  
+AOF是以日志方式记录数据库状态，数据库启动时会先读取日志
+
+
 
